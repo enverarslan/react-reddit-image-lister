@@ -1,0 +1,30 @@
+{
+  "name": "react-reddit-image-lister",
+  "version": "1.0.0",
+  "description": "Reddit Subreddits Images lister with React.js",
+  "main": "app.js",
+  "dependencies": {
+    "node-static": "^0.7.7",
+    "react-tools": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/enverarslan/react-reddit-image-lister"
+  },
+  "keywords": [
+    "react",
+    "reddit",
+    "json",
+    "api"
+  ],
+  "author": "Enver Arslan <enver@programmer.net>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enverarslan/react-reddit-image-lister/issues"
+  },
+  "homepage": "https://github.com/enverarslan/react-reddit-image-lister"
+}
