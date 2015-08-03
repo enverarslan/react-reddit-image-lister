@@ -2,6 +2,6 @@
 Reddit Subreddits Images lister with React.js
 
 Available Subreddits:
-- EarthPorn
-- SpacePorn
-- HistoryPorn
+- [EarthPorn](https://www.reddit.com/r/earthporn)
+- [SpacePorn](https://www.reddit.com/r/spaceporn)
+- [HistoryPorn](https://www.reddit.com/r/historyporn)
