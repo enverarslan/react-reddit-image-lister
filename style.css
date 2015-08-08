@@ -1,0 +1,34 @@
+body
+ul{
+    padding:0;
+    list-style-type: none
+}
+img{
+    width: 100%;
+    max-width: 100%;
+
+
+}
+.load{
+    margin-bottom: 2em;
+    border: 1px solid #ccc;
+    color: #838383;
+    outline: none;
+}
+.load:focus{
+    outline:none
+}
+
+.radios{
+    overflow: hidden;
+}
+.radio{
+    float:left;
+    width: 200px;
+}
+
+.radio+.radio{
+    margin-top: 10px;
+}
+
+.panel-body{padding: 0}
