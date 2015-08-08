@@ -1,5 +1,4 @@
 .idea
 .gitignore
-.gitattributes
 .module-cache
 node_modules
