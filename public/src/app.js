@@ -1,13 +1,12 @@
 var Subreddit = React.createClass({
 
-    getItems: function (reset, cb) {
+    getItems: function (cb) {
 
         var url = "http://www.reddit.com/r/" + this.state.subreddit + "/"+this.state.type+".json?limit=" + this.state.limit + '&after=' + this.state.after;
 
         $.ajax({
             url: url,
             dataType: 'json',
-            cache: false,
             success: function (resp) {
                 var items = resp.data.children.filter(function (item) {
                     return !item.data.is_self && item.data.preview;
@@ -39,7 +38,7 @@ var Subreddit = React.createClass({
                 after: null,
                 items: []
             }, function () {
-                return this.getItems(1);
+                return this.getItems();
             });
 
     },
@@ -49,7 +48,7 @@ var Subreddit = React.createClass({
             after: null,
             items: []
         }, function(){
-            return this.getItems(1);
+            return this.getItems();
         });
     },
     getInitialState: function () {
@@ -71,6 +70,14 @@ var Subreddit = React.createClass({
                 {
                     value: 'historyporn',
                     name: 'History Porn'
+                },
+                {
+                    value: 'summerporn',
+                    name: 'Summer Porn'
+                },
+                {
+                    value: 'astrophotography',
+                    name: 'AstroPhotography'
                 }
             ]
         };
@@ -107,7 +114,7 @@ var LoadMore = React.createClass({
         var btn = $(e.target);
         btn.prop('disabled', true);
 
-        this.props.click(0, function(){
+        this.props.click(function(){
             return btn.prop('disabled', false);
         });
     },
@@ -122,7 +129,7 @@ var SelectSubReddit = React.createClass({
 
     render: function () {
         return (
-            <div className='col-sm-6'>
+            <div className='col-sm-3'>
                 <div className="form-group">
                     <label>Select a Subreddit</label>
                     <select className="form-control" onChange={this.props.changer} value={this.props.value}>
@@ -141,7 +148,7 @@ var RadioTypes = React.createClass({
 
     render: function () {
         return (
-            <div className="col-sm-6">
+            <div className="col-sm-9">
                 <div className="form-group">
                     <label>Select a results type</label>
                     <div className="radios">
@@ -149,6 +156,12 @@ var RadioTypes = React.createClass({
                             <label>
                                 <input type="radio" name="type" value="new" checked={this.props.type == 'new'} onChange={this.props.changer}/>
                                 New shares
+                            </label>
+                        </div>
+                        <div className="radio">
+                            <label>
+                                <input type="radio" name="type" value="hot" checked={this.props.type == 'hot'} onChange={this.props.changer}/>
+                                Hot shares
                             </label>
                         </div>
                         <div className="radio">

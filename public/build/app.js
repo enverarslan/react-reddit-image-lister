@@ -1,13 +1,12 @@
 var Subreddit = React.createClass({displayName: "Subreddit",
 
-    getItems: function (reset, cb) {
+    getItems: function (cb) {
 
         var url = "http://www.reddit.com/r/" + this.state.subreddit + "/"+this.state.type+".json?limit=" + this.state.limit + '&after=' + this.state.after;
 
         $.ajax({
             url: url,
             dataType: 'json',
-            cache: false,
             success: function (resp) {
                 var items = resp.data.children.filter(function (item) {
                     return !item.data.is_self && item.data.preview;
@@ -39,7 +38,7 @@ var Subreddit = React.createClass({displayName: "Subreddit",
                 after: null,
                 items: []
             }, function () {
-                return this.getItems(1);
+                return this.getItems();
             });
 
     },
@@ -49,7 +48,7 @@ var Subreddit = React.createClass({displayName: "Subreddit",
             after: null,
             items: []
         }, function(){
-            return this.getItems(1);
+            return this.getItems();
         });
     },
     getInitialState: function () {
@@ -71,6 +70,14 @@ var Subreddit = React.createClass({displayName: "Subreddit",
                 {
                     value: 'historyporn',
                     name: 'History Porn'
+                },
+                {
+                    value: 'summerporn',
+                    name: 'Summer Porn'
+                },
+                {
+                    value: 'astrophotography',
+                    name: 'AstroPhotography'
                 }
             ]
         };
@@ -107,7 +114,7 @@ var LoadMore = React.createClass({displayName: "LoadMore",
         var btn = $(e.target);
         btn.prop('disabled', true);
 
-        this.props.click(0, function(){
+        this.props.click(function(){
             return btn.prop('disabled', false);
         });
     },
@@ -122,7 +129,7 @@ var SelectSubReddit = React.createClass({displayName: "SelectSubReddit",
 
     render: function () {
         return (
-            React.createElement("div", {className: "col-sm-6"}, 
+            React.createElement("div", {className: "col-sm-3"}, 
                 React.createElement("div", {className: "form-group"}, 
                     React.createElement("label", null, "Select a Subreddit"), 
                     React.createElement("select", {className: "form-control", onChange: this.props.changer, value: this.props.value}, 
@@ -141,7 +148,7 @@ var RadioTypes = React.createClass({displayName: "RadioTypes",
 
     render: function () {
         return (
-            React.createElement("div", {className: "col-sm-6"}, 
+            React.createElement("div", {className: "col-sm-9"}, 
                 React.createElement("div", {className: "form-group"}, 
                     React.createElement("label", null, "Select a results type"), 
                     React.createElement("div", {className: "radios"}, 
@@ -149,6 +156,12 @@ var RadioTypes = React.createClass({displayName: "RadioTypes",
                             React.createElement("label", null, 
                                 React.createElement("input", {type: "radio", name: "type", value: "new", checked: this.props.type == 'new', onChange: this.props.changer}), 
                                 "New shares"
+                            )
+                        ), 
+                        React.createElement("div", {className: "radio"}, 
+                            React.createElement("label", null, 
+                                React.createElement("input", {type: "radio", name: "type", value: "hot", checked: this.props.type == 'hot', onChange: this.props.changer}), 
+                                "Hot shares"
                             )
                         ), 
                         React.createElement("div", {className: "radio"}, 
