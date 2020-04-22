@@ -88,7 +88,6 @@ var Subreddit = React.createClass({
         }
     },
     componentDidUpdate: function (prevProps, prevState) {
-
     },
     render: function () {
         return (
@@ -120,7 +119,7 @@ var LoadMore = React.createClass({
     },
     render: function(){
         return (
-            <button className="btn btn-block load" onClick={this.clickHandler}>Load More</button>
+            <button className="btn btn-block btn-success load" onClick={this.clickHandler}>Load More</button>
         )
     }
 });
@@ -181,9 +180,7 @@ var RadioTypes = React.createClass({
 
 /* Items */
 var Items = React.createClass({
-
     render: function () {
-
         var items = this.props.data.map(function (item, index) {
             return (<Item data={item.data} key={index}/>);
         });
@@ -202,6 +199,8 @@ var Item = React.createClass({
     render: function () {
         item = this.props.data;
         url = "http://reddit.com" + item.permalink;
+		resolutions = item.preview.images[0].resolutions		
+		preview = resolutions[resolutions.length - 1].url.replace(/amp;/g, '');
         return (
             <article className="panel panel-default">
                 <div className="panel-heading">
@@ -209,7 +208,9 @@ var Item = React.createClass({
                 </div>
                 <div className="panel-body">
                     <figure>
-                        <img src={item.preview.images[0].source.url}/>
+						<a href={item.url} target="_blank" title="Go Full Resolution Image">
+							<img src={preview}/>
+						</a>
                     </figure>
                 </div>
                 <div className="panel-footer">

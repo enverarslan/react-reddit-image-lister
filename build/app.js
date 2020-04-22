@@ -88,7 +88,6 @@ var Subreddit = React.createClass({displayName: "Subreddit",
         }
     },
     componentDidUpdate: function (prevProps, prevState) {
-
     },
     render: function () {
         return (
@@ -120,7 +119,7 @@ var LoadMore = React.createClass({displayName: "LoadMore",
     },
     render: function(){
         return (
-            React.createElement("button", {className: "btn btn-block load", onClick: this.clickHandler}, "Load More")
+            React.createElement("button", {className: "btn btn-block btn-success load", onClick: this.clickHandler}, "Load More")
         )
     }
 });
@@ -181,9 +180,7 @@ var RadioTypes = React.createClass({displayName: "RadioTypes",
 
 /* Items */
 var Items = React.createClass({displayName: "Items",
-
     render: function () {
-
         var items = this.props.data.map(function (item, index) {
             return (React.createElement(Item, {data: item.data, key: index}));
         });
@@ -202,6 +199,8 @@ var Item = React.createClass({displayName: "Item",
     render: function () {
         item = this.props.data;
         url = "http://reddit.com" + item.permalink;
+		resolutions = item.preview.images[0].resolutions		
+		preview = resolutions[resolutions.length - 1].url.replace(/amp;/g, '');
         return (
             React.createElement("article", {className: "panel panel-default"}, 
                 React.createElement("div", {className: "panel-heading"}, 
@@ -209,7 +208,9 @@ var Item = React.createClass({displayName: "Item",
                 ), 
                 React.createElement("div", {className: "panel-body"}, 
                     React.createElement("figure", null, 
-                        React.createElement("img", {src: item.preview.images[0].source.url})
+						React.createElement("a", {href: item.url, target: "_blank", title: "Go Full Resolution Image"}, 
+							React.createElement("img", {src: preview})
+						)
                     )
                 ), 
                 React.createElement("div", {className: "panel-footer"}, 

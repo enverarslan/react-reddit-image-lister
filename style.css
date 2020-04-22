@@ -11,8 +11,7 @@ img{
 }
 .load{
     margin-bottom: 2em;
-    border: 1px solid #ccc;
-    color: #838383;
+    color: #fff;
     outline: none;
 }
 .load:focus{
